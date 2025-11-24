@@ -14,7 +14,7 @@ jobs:
           path: notebooks
       - uses: actions/checkout@v4
         with:
-          repository: ess-dmsc-dram/dmsc-school
+          repository: ess-dmsc-dram/winter-school
           path: source
 
       - uses: actions/setup-python@v5
