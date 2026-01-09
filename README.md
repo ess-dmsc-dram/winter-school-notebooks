@@ -1,103 +1,20 @@
-# {{ title_of_your_report }}
+# Winter School Notebooks
+This repository contains the notebooks used for the exercises at the DMSC Winter School. Its a condensed version of the [DMSC Summer School](https://ess-dmsc-dram.github.io/dmsc-school/intro.html), so only the 3-mcstas and 4-reduction folders will be used, though the rest of the material is available in the repository.
 
-> 2025 DMSC Summer School Report - Template <br>
-  Fill the variables, wrapped by {{  }} or blank spaces with your own information <br>
-  You can add more sections and rename them freely. <br>
-  Explain methodologies, add your insights and summarize results including plots in each section.
+## Getting started
+Clone this repository to your VISA instance and open the desired notebook. You will be asked which kernel to use, choose "ESS", it has all the software we need installed.
 
-|   |   |
-| - | - |
-| Date | 2025.08.25 ~ 2025.08.29 |
-| Location | European Spallation Source Eric, Data Management and Software Centre |
-| Course Track | {{ COURSE_TRACK }} (One of `powder`, `QENS` and `SANS`) |
-| Author | {{ YOUR_NAME }} |
-| Author ORCID ID | {{ YOUR_ORCID_ID }} |
+## Exercises
+There are three available exercise tracks:
 
-## Table of Contents
+- SANS
+- QENS
+- Powder diffraction
 
-- [Simulation](#Simulation)
-- [Data Reduction](#Data-Reduction)
-- [Data Analysis](#Data-Analysis)
-- [Conclusion](#Conclusion)
+You will use McStas through Python to generate your data set, which you will then continue to work with in the later reduction exercises. There will be a backup dataset available in case you don't get through the entire McStas exercise notebook.
 
-## Simulation
+### Short versions of notebooks
+Due to the shorter available time for exercises, the notebooks have been shortened to focus on the most important parts. The slightly longer (full) versions can be found in the online docs of the original [summer school](https://ess-dmsc-dram.github.io/dmsc-school/intro.html).```
 
-> Day 2, 2025.08.26
-
-```python
-# Add your code snippet how you run the simulation
-```
-
-### Simulation Result
-
-| Dataset Name | Scicat Dataset Persistent Identifier (PID) |
-| ------------ | ------------------------------------------ |
-| {{ SIMULATION_DATASET_NAME }} | [ {{ SIMULATION_DATASET_PID }} ]({{ LINK_TO_THE_SIMULATION_DATASET_IN_SCICAT }}) |
-
-<br>
-
-> Add your plots here
-
-![Alternative Text of Image](full_path_to_the_image "Help text of Image")
-
-## Data Reduction
-
-> Day 3, 2025.08.27
-
-
-### Data Reduction Input
-
-| Dataset Name | Description |
-| ------------ | ----------- |
-| {{ NAME_OF_THE_REDUCTION_INPUT_DATASET }} |  |
-
-### Data Reduction Methodology
-
-```python
-# Add your code snippet how you reduced the data
-```
-
-### Data Reduction Result
-
-| Dataset Name | Scicat Dataset Persistent Identifier (PID) |
-| ------------ | ------------------------------------------ |
-| {{ REDUCED_DATASET_NAME }} | [ {{ REDUCED_DATASET_PID }} ]({{ LINK_TO_THE_REDUCED_DATASET_IN_SCICAT }}) |
-
-
-<br>
-
-> Add your plots here
-
-![Alternative Text of Image](full_path_to_the_image "Help text of Image")
-
-## Data Analysis
-
-> Day 4, 2025.08.28
-
-### Data Analysis Input
-
-| Dataset Name | Description |
-| ------------- | ----------- |
-| {{ NAME_OF_THE_ANALYSIS_INPUT_DATASET }} |  |
-
-### Data Analysis Methodology
-
-```python
-# Add your code snippet how you analyzed the data
-```
-
-### Data Analysis Result
-
-| Dataset Name | Scicat Dataset Persistent Identifier (PID) |
-| ------------ | ------------------------------------------ |
-| {{ ANALYSED_DATASET_NAME }} | [ {{ ANALYSED_DATASET_PID }} ]({{ LINK_TO_THE_ANALYSED_DATASET_IN_SCICAT }}) |
-
-<br>
-
-> Add your plots here
-
-![Alternative Text of Image](full_path_to_the_image "Help text of Image")
-
-## Conclusion
-
-> Add your insights here
+### Solutions
+Solutions can be found in the book [https://ess-dmsc-dram.github.io/winter-school/intro.html](https://ess-dmsc-dram.github.io/winter-school/intro.html)
