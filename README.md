@@ -1,5 +1,5 @@
 # Winter School Notebooks
-This repository contains the notebooks used for the exercises at the DMSC Winter School. Its a condensed version of the DMSC Summer School, so only the 3-mcstas and 4-reduction folders will be used, though the rest of the material is available in the repository.
+This repository contains the notebooks used for the exercises at the DMSC Winter School. Its a condensed version of the [DMSC Summer School](https://ess-dmsc-dram.github.io/dmsc-school/intro.html), so only the 3-mcstas and 4-reduction folders will be used, though the rest of the material is available in the repository.
 
 ## Getting started
 Clone this repository to your VISA instance and open the desired notebook. You will be asked which kernel to use, choose "ESS", it has all the software we need installed.
