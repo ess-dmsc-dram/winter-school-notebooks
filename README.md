@@ -14,7 +14,7 @@ There are three available exercise tracks:
 You will use McStas through Python to generate your data set, which you will then continue to work with in the later reduction exercises. There will be a backup dataset available in case you don't get through the entire McStas exercise notebook.
 
 ### Short versions of notebooks
-Due to the shorter avialble time for exercises, the McStas notebooks are available in shortened versions that remove the most time consuming questions. Choose this version of the notebooks unless you already have a bit of McStasScript experience.
+Due to the shorter available time for exercises, the notebooks have been shortened to focus on the most important parts. The slightly longer (full) versions can be found in the online docs of the original [summer school](https://ess-dmsc-dram.github.io/dmsc-school/intro.html).```
 
 ### Solutions
 Solutions can be found in the book [https://ess-dmsc-dram.github.io/winter-school/intro.html](https://ess-dmsc-dram.github.io/winter-school/intro.html)
