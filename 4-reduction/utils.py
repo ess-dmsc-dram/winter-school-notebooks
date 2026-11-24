@@ -1,6 +1,9 @@
 # SPDX-License-Identifier: BSD-3-Clause
-# Copyright (c) 2025 Scipp contributors (https://github.com/scipp)
+# Copyright (c) 2026 Scipp contributors (https://github.com/scipp)
 from pathlib import Path
+import scippnexus as snx
+
+from plopp.widgets import HBar, VBar
 
 
 def fetch_data(name: str, quiet=True) -> str:
@@ -22,9 +25,9 @@ def fetch_data(name: str, quiet=True) -> str:
     logger.setLevel("ERROR" if quiet else "INFO")
 
     registry = pooch.create(
-        path=pooch.os_cache('dmsc_school'),
+        path=pooch.os_cache("dmsc_school"),
         retry_if_failed=3,
-        base_url=f"https://public.esss.dk/groups/scipp/dmsc-summer-school/2025",
+        base_url="https://public.esss.dk/groups/scipp/dmsc-summer-school/2026",
         registry={
             f"{name}.zip": None,
         },
@@ -40,3 +43,58 @@ def fetch_data(name: str, quiet=True) -> str:
         return str(path.parent.absolute())
     else:
         return file_path[0]
+
+def load_loki(path):
+    data = snx.compute_positions(snx.load(path))
+    bank_sizes = {
+        'loki_detector_0': {'layer': 4, 'tube': 56, 'straw': 7, 'pixel': -1},
+        'loki_detector_1': {'layer': 4, 'tube': 16, 'straw': 7, 'pixel': -1},
+        'loki_detector_2': {'layer': 4, 'tube': 12, 'straw': 7, 'pixel': -1},
+        'loki_detector_3': {'layer': 4, 'tube': 16, 'straw': 7, 'pixel': -1},
+        'loki_detector_4': {'layer': 4, 'tube': 12, 'straw': 7, 'pixel': -1},
+        'loki_detector_5': {'layer': 4, 'tube': 28, 'straw': 7, 'pixel': -1},
+        'loki_detector_6': {'layer': 4, 'tube': 32, 'straw': 7, 'pixel': -1},
+        'loki_detector_7': {'layer': 4, 'tube': 20, 'straw': 7, 'pixel': -1},
+        'loki_detector_8': {'layer': 4, 'tube': 32, 'straw': 7, 'pixel': -1},
+    }
+    for key, sizes in bank_sizes.items():
+        data['entry']['instrument'][key]['detector_events'] = data['entry']['instrument'][key]['detector_events'].fold(dim='detector_number', sizes=sizes)
+    return data
+
+
+def show_as_static_plot(fig) -> VBar:
+    """
+    Render an interactive Plopp figure statically.
+
+    This is useful for showing interactive figures in the book.
+    Interactive figures require the ``widgets`` backend for matplotlib.
+    But this breaks the figures in the built book.
+
+    With this function, you can render, e.g., a slicer plot using this sequence of cells:
+
+    .. code-block:: python
+
+        # %%  (remove-cell)
+        %matplotlib widget
+
+        # %%  (remove-output)
+        fig = pp.slicer(...)
+        fig
+
+        # %%  (remove-input, dmsc-school-remove)
+        from utils import show_as_static_plot
+        show_as_static_plot(fig)
+
+        # %%  (remove-cell)
+        %matplotlib inline
+
+    Here, ``# %% (tags)`` indicates the start of a notebook cell and the tags
+    used in that cell.
+    """
+    return VBar(
+        [
+            fig.top_bar,
+            HBar([fig.left_bar, fig.view.canvas.to_image(), fig.right_bar]),
+            fig.bottom_bar,
+        ]
+    )
