@@ -1,11 +1,10 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
-from collections.abc import Iterable
 from typing import Tuple
 
-from easyscience.Objects.variable import Parameter
 import numpy as np
-import pandas as pd
+from plopp.widgets import HBar, VBar
+
 
 def load(filename: str) -> Tuple[np.ndarray, ...]:
     """
@@ -23,9 +22,9 @@ def fetch_data(name: str) -> str:
     import pooch
 
     registry = pooch.create(
-        path=pooch.os_cache('dmsc_school'),
+        path=pooch.os_cache("dmsc_school"),
         retry_if_failed=3,
-        base_url=f"https://public.esss.dk/groups/scipp/dmsc-summer-school/2025",
+        base_url="https://public.esss.dk/groups/scipp/dmsc-summer-school/2026",
         registry={
             name: None,
         },
@@ -33,7 +32,51 @@ def fetch_data(name: str) -> str:
     return registry.fetch(name)
 
 
-def save_fit_params(filename: str, params: Iterable[Parameter]) -> None:
-    fit_params = pd.DataFrame([param.encode_data() for param in params])
-    with open(filename, 'w') as file:
-        file.write(fit_params.to_csv(index=False))
+def show_as_static_plot(fig, residuals=False) -> VBar:
+    """
+    Render an interactive Plopp figure statically.
+
+    This is useful for showing interactive figures in the book.
+    Interactive figures require the ``widgets`` backend for matplotlib.
+    But this breaks the figures in the built book.
+
+    With this function, you can render, e.g., a slicer plot using this sequence of cells:
+
+    .. code-block:: python
+
+        # %%  (remove-cell)
+        %matplotlib widget
+
+        # %%  (remove-output)
+        fig = pp.slicer(...)
+        fig
+
+        # %%  (remove-input, dmsc-school-remove)
+        from utils import show_as_static_plot
+        show_as_static_plot(fig)
+
+        # %%  (remove-cell)
+        %matplotlib inline
+
+    Here, ``# %% (tags)`` indicates the start of a notebook cell and the tags
+    used in that cell.
+    """
+    if residuals:
+        res = fig.bottom_bar[0][0]
+
+        bottom = VBar(
+            [
+                HBar([res.left_bar, res.view.canvas.to_image(), res.right_bar]),
+                fig.bottom_bar[0][1],
+            ]
+        )
+    else:
+        bottom = fig.bottom_bar
+
+    return VBar(
+        [
+            fig.top_bar,
+            HBar([fig.left_bar, fig.view.canvas.to_image(), fig.right_bar]),
+            bottom,
+        ]
+    )
